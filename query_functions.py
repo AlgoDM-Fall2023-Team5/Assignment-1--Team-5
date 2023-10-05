@@ -57,7 +57,11 @@ def query41(option):
     
     return exe_query
 #======================================================
-def query42():
+def query42(option):
+
+    #fetch the query 
+    query = sql_query_reader(option)
+
     col1,col2 = st.columns(2)
     
     with col1:
@@ -65,21 +69,35 @@ def query42():
     with col2:
         year_slider = st.slider("Year",min_value=1900,max_value=2049,value=2000)
 
-    return month_slider,year_slider
+    exe_query = query.format(month_slider,year_slider)
 
-def query43():
+    return exe_query
+
+def query43(option):
+    
+    #fetching the query
+    query = sql_query_reader(option)
+
     gmt_options = [-5,-6,-7,-8,'N/A']
     col1,col2 = st.columns(2)
 
     with col1:
         year_slider = st.slider("Year",min_value=1900,max_value=2049,value=2000)
     with col2:
-        gmt_select = st.multiselect("GMT",options =gmt_options,default=-5,placeholder="GMT")
+        gmt_select = st.selectbox("GMT",options =gmt_options,placeholder="GMT")
     
-    return year_slider,gmt_select
-def query44():
+
+    exe_query = query.format(gmt_select,year_slider)
+    
+    return exe_query
+
+
+def query44(option):
     #store_slider = st.slider("Store_Number",min_value=1,max_value=1400,value=4)
     
+    #fetching query
+    query = sql_query_reader(option)
+
     store_input = st.text_input("Enter Store Number (1-1400 only): ",value=4)
 
     if int(store_input)>=1 and int(store_input) <=1400:
@@ -87,9 +105,15 @@ def query44():
     else:
         st.error("enter between 1-1400")
 
-    return store_input
+    exe_query = query.format(store_input)
 
-def query45():
+    return exe_query
+
+def query45(option):
+
+    #fetching the query
+    query = sql_query_reader(option)
+
     col1,col2 = st.columns(2)
 
     with col1:
@@ -97,9 +121,15 @@ def query45():
     with col2:
         year_slider = st.slider("Year",min_value=1900,max_value=2049,value=2001)
 
-    return qoy_slider,year_slider
+    exe_query = query.format(qoy_slider,year_slider)
 
-def query46():
+    return exe_query
+
+def query46(option):
+    
+    #fetching query
+    query = sql_query_reader(option)
+
     col1,col2,col3,col4 = st.columns(4)
     city_options = ["Pleasant Hill", "Corinth", "Oakdale", "Mount Vernon", "Mount Carmel",
     "Jackson", "Maple Grove", "Dover", "Rosedale", "Brownsville", "Needmore",
@@ -135,16 +165,38 @@ def query46():
     with col2:
         vehicle_count_select = st.slider("Vehicle Count",min_value=-1,max_value=4,value=3)
     with col3:
-        year_select = st.slider("Year",min_value=1900,max_value=2049,value=(1999,1999+2))
+        year_select = st.slider("Year",min_value=1900,max_value=2049,value=1999)
     with col4:
         dept_slider = st.slider("DEPT Count",min_value=0,max_value=9,value=4)     
-    return city_multiselect,vehicle_count_select,year_select,dept_slider
+    
+    count = 0
+    while not city_multiselect :
+        if count == 0:
+            if len(city_multiselect) == 0 :
+                st.warning("Please select at least one option for each category.")
+        count = count +1    
+    
+    # if length is one then convert into string
 
-def query47():
+    city_multiselect = city_multiselect[0] if len(city_multiselect) == 1 else city_multiselect
+    
+    exe_query = query.format(tuple(city_multiselect),vehicle_count_select,year_select,dept_slider)
+
+    return exe_query
+
+def query47(option):
+
+    query = sql_query_reader(option)
     year_select = st.slider("Year",min_value=1900,max_value=2049,value=1999)
-    return year_select
+    
+    exe_query = query.format(year_select)
+    
+    return exe_query
 
-def query48():
+def query48(option):
+
+    query = sql_query_reader(option)
+
     col1,col2,col3,col4 = st.columns(4)
 
     MS_options = ['M','S','D','W','U']
@@ -159,17 +211,36 @@ def query48():
     with col2:
         ES_multiselect = st.multiselect(label="Education Status",options=ES_options,default=['4 yr Degree','2 yr Degree','College'])
     with col3:
-        State_multiselect = st.multiselect(label="State",options=state_options,deafult=['CO','OH','TX','OR','MN','KY','VA','CA','MS'])
+        State_multiselect = st.multiselect(label="State",options=state_options,default=['CO','OH','TX','OR','MN','KY','VA','CA','MS'])
     with col4:
         year_select = st.slider("Year",min_value=1900,max_value=2049,value=2000)
 
+    count = 0
+    while not MS_multiselect or not ES_multiselect or not State_multiselect:
+        if count == 0:
+            if len(MS_multiselect) == 0 or len(ES_multiselect) == 0 or len(State_multiselect) == 0:
+                st.warning("Please select at least one option for each category.")
+        count = count +1    
+    
+    # if length is one then convert into string
 
-    return MS_multiselect,ES_multiselect,State_multiselect,year_select
+    MS_multiselect = MS_multiselect[0] if len(MS_multiselect) == 1 else MS_multiselect
+    ES_multiselect = ES_multiselect[0] if len(ES_multiselect) == 1 else ES_multiselect
+    State_multiselect = State_multiselect[0] if len(State_multiselect) == 1 else State_multiselect
+    
+    exe_query = query.format(tuple(MS_multiselect),tuple(ES_multiselect),tuple(State_multiselect),year_select)
+    return exe_query
 
-def query49():
-    pass
+def query49(option):
+    query = sql_query_reader(option)
 
-def query50():
+    return query
+
+def query50(option):
+    
+    # fetching query
+    query = sql_query_reader(option)
+
     col1,col2 = st.columns(2)
     
     with col1:
@@ -177,4 +248,6 @@ def query50():
     with col2:
         year_slider = st.slider("Year",min_value=1900,max_value=2049,value=2001)
 
-    return month_slider,year_slider
+    exe_query = query.format(month_slider,year_slider)
+
+    return exe_query

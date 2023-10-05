@@ -26,7 +26,7 @@ Qualification Substitution Parameters
        ss_sold_date_sk = d_date_sk and
        ss_store_sk = s_store_sk and
        (
-         d_year = 1999 
+         d_year = {0}
        )
  group by i_category, i_brand,
           s_store_name, s_company_name,
@@ -49,7 +49,7 @@ Qualification Substitution Parameters
        v1.rn = v1_lead.rn - 1)
   select  *
  from v2
- where  d_year = 1999 and
+ where  d_year = {0} and
         avg_monthly_sales > 0 and
         case when avg_monthly_sales > 0 then abs(sum_sales - avg_monthly_sales) / avg_monthly_sales else null end > 0.1
  order by sum_sales - avg_monthly_sales, avg_monthly_sales

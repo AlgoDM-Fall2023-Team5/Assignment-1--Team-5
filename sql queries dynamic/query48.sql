@@ -33,28 +33,23 @@ FROM
 WHERE
     s_store_sk = ss_store_sk
     AND ss_sold_date_sk = d_date_sk
-    AND d_year = 2000
+    AND d_year = {3}
     AND (
         (
-            cd_demo_sk = ss_cdemo_sk
-            AND cd_marital_status = 'M'
-            AND cd_education_status = '4 yr Degree'
+    cd_demo_sk = ss_cdemo_sk
+    AND (
+        (cd_marital_status IN {0}
+        AND cd_education_status IN {1} 
         )
-        OR (
-            cd_demo_sk = ss_cdemo_sk
-            AND cd_marital_status = 'D'
-            AND cd_education_status = '2 yr Degree'
-        )
-        OR (
-            cd_demo_sk = ss_cdemo_sk
-            AND cd_marital_status = 'S'
-            AND cd_education_status = 'College'
-        )
+       
+    )
+)
+
     )
     AND (
         ss_addr_sk = ca_address_sk
         AND ca_country = 'United States'
-        AND ca_state IN ('CO', 'OH', 'TX', 'OR', 'MN', 'KY', 'VA', 'CA', 'MS')
+        AND ca_state IN {2}
     )
 GROUP BY
     cd_marital_status,

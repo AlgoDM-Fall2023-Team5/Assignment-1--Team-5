@@ -16,7 +16,7 @@ select  ca_state, sum(ws_sales_price)
                              )
  	    )
  	and ws_sold_date_sk = d_date_sk
- 	and d_qoy = 2 and d_year = 2001
+ 	and d_qoy = {0} and d_year = {1}
  group by  ca_state
  order by  ca_state
  limit 100;

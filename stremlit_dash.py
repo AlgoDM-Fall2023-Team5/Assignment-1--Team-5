@@ -25,29 +25,74 @@ query_options = {'Query41':query41,
                  'Query49':query49,
                  'Query50':query50}
 
+#dictonary based on selection
+question_to_answer = {
+    'Query41':'Query41',
+    'Query42':'Query42',
+    'Query43':'Query43',
+    'Query44':'Query44',
+    'Query45':'Query45',
+    'Query46':'Query46',
+    'Query47':'Query47',
+    'Query48':'Query48',
+    'Query49':'Query49',
+    'Query50':'Query50'
+}
 
 
 
 # bar chart 
 def bar_chart_maker(df):
     col1,col2 = st.columns([1,1])
-    with col1:
-        x_axis = st.selectbox("Select X_axis: ",df.columns)
-    with col2:
-        y_axis = st.selectbox("Slect Y axis :",df.columns)
+    try:
+        with col1:
+            x_axis = st.selectbox("Select X_axis: ",df.columns)
+        with col2:
+            y_axis = st.selectbox("Select Y axis :",df.columns)
+        
+        fig = px.bar(df, x=x_axis, y=y_axis, title=f'Bar Chart: {x_axis} vs {y_axis}')
+        st.plotly_chart(fig)
+    except Exception as e:
+        st.error("Please Check your Bar chart",e)
 
 #=======================================================================
 #pie chart maker
 def pie_chart_maker(df):
-    pass
+    try:
+        column = st.selectbox("Select a Column :",df.columns)
+        
+        fig = px.pie(df, names=column, values=column, title=f'Pie Chart: {column}')
+        st.plotly_chart(fig)
+    except Exception as e:
+        st.error("please check you pie chart",e)
 #========================================================================
 # scatter plot maker
 def scatter_plot_maker(df):
-    pass
+    col1,col2 = st.columns([1,1])
+    try:
+        with col1:
+            x_axis = st.selectbox("Select X_axis: ",df.columns)
+        with col2:
+            y_axis = st.selectbox("Select Y axis :",df.columns)
+        
+        fig = px.scatter(df, x=x_axis, y=y_axis, title=f'Scatter Plot: {x_axis} vs {y_axis}')
+        st.plotly_chart(fig)
+    except Exception as e:
+        st.error("Please Check your Scatter Plot",e)
 #=========================================================================
 # line chart
 def line_chart_maker(df):
-    pass
+    col1,col2 = st.columns([1,1])
+    try:
+        with col1:
+            x_axis = st.selectbox("Select X_axis: ",df.columns)
+        with col2:
+            y_axis = st.selectbox("Select Y axis :",df.columns)
+        
+        fig = px.line(df, x=x_axis, y=y_axis, title=f'Line Chart: {x_axis} vs {y_axis}')
+        st.plotly_chart(fig)
+    except Exception as e:
+        st.error("Please Check your Line chart",e)
 #=========================================================================
 def chart_maker(df):
     chart_selection = st.selectbox("Select Chart Type",chart_types)
@@ -62,7 +107,7 @@ def chart_maker(df):
     elif chart_selection == "Line Chart" and len(df)>0:
         line_chart_maker(df)
     else:
-        st.write("Please select the type of chart")
+        st.write("Empty Table Returned")
 #========================================================================
 # this is used to read the query
 # def sql_query_reader(option):
@@ -72,29 +117,20 @@ def chart_maker(df):
 #     return query
 #=========================================================================
 # this is used to execute the query
+@st.cache_data
 def query_executor(query):
     try:
         #get the query from another folder
         #query = sql_query_reader(option)
         # executing the sql query based on the selection
         table = conn.query(query,ttl=600)
-        with col4:
-            st.write("")
-            st.write("")
-            table_button = st.checkbox("Show Table",["Show Table"])
-        if table_button:
-            st.write(table)
+        
         return table
     except Exception as e:
         st.error("Error Executing the Query : {}".format(str(e)))
     
 
 #=========================================================================
-# sample code
-#df = pd.DataFrame()
-
-
-#==========================================================================
 
 # Connection Initialisation
 conn = st.experimental_connection('snowflake',type='sql')
@@ -110,6 +146,8 @@ if select_button == "Given Queries":
     with col3:
         option = st.selectbox("Select a Query",query_names_list)
     
+    if option in question_to_answer:
+        option = question_to_answer[option]
     # call fucntions based on the query selected
     if option in query_options:
         query_function = query_options[option]
@@ -118,7 +156,29 @@ if select_button == "Given Queries":
         query = query_function(option)
     df = query_executor(query)
 
+    # This is for showing table 
+    with col4:
+        st.write("")
+        st.write("")
+        table_button = st.checkbox("Show Table",["Show Table"])
+    if table_button:
+        st.write(df)
+
     chart_maker(df)
+
+
+# Custom Query
 else:
-    query = st.text_input('Enter Your Query')
-    #chart_maker(df)
+    
+    col5,col6,col7 = st.columns(3)
+    with col5:
+        url = "https://www.tpc.org/tpc_documents_current_versions/pdf/tpc-ds_v2.1.0.pdf"
+        st.write("dataset info and table schema can be found on this [link](%s)" %url)
+        query = st.text_input('Enter Your Query',value="Select * from store_sales limit 10")
+    
+    df = query_executor(query)
+    
+
+    st.write("Table Results:")
+    st.write(df)
+    chart_maker(df)
