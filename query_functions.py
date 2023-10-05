@@ -234,7 +234,16 @@ def query48(option):
 def query49(option):
     query = sql_query_reader(option)
 
-    return query
+    col1,col2 = st.columns(2)
+
+    with col1:
+        month_slider = st.slider("Month",min_value=1,max_value=12,value=12)
+    with col2:
+        year_slider = st.slider("Year",min_value=1900,max_value=2049,value=2001)
+
+    exe_query = query.format(year_slider,month_slider)
+
+    return exe_query
 
 def query50(option):
     
