@@ -6,10 +6,11 @@ import plotly.express as px
 from query_functions import *
 
 # change your subfolder path to the query folder of your system
-subfolder_path = "C:/Users/shiri/Documents/Assg1ADM/Assignment-1--Team-5/sql queries"
+subfolder_path = "C:/Users/shiri/Documents/Assg1ADM/Assignment-1--Team-5/sql queries dynamic"
 
 # variables declaration
-query_names_list = ["Query41","Query42","Query43","Query44","Query45"]
+query_names_list = ["Query41","Query42","Query43","Query44","Query45"
+                    ,"Query46","Query47","Query48","Query49","Query50"]
 chart_types = ["Bar Chart","Pie Chart","Scatter Plot","Line Chart"]
 
 # dictonary instead of if else to call functions
@@ -64,17 +65,17 @@ def chart_maker(df):
         st.write("Please select the type of chart")
 #========================================================================
 # this is used to read the query
-def sql_query_reader(option):
-    option = option.lower()
-    with open(subfolder_path+'/'+option+".sql",'r') as file:
-        query = file.read()
-    return query
+# def sql_query_reader(option):
+#     option = option.lower()
+#     with open(subfolder_path+'/'+option+".sql",'r') as file:
+#         query = file.read()
+#     return query
 #=========================================================================
 # this is used to execute the query
-def query_executor(option):
+def query_executor(query):
     try:
         #get the query from another folder
-        query = sql_query_reader(option)
+        #query = sql_query_reader(option)
         # executing the sql query based on the selection
         table = conn.query(query,ttl=600)
         with col4:
@@ -114,8 +115,8 @@ if select_button == "Given Queries":
         query_function = query_options[option]
         # calls that particular function
         st.write("Attributes")
-        query_function()
-    df = query_executor(option)
+        query = query_function(option)
+    df = query_executor(query)
 
     chart_maker(df)
 else:
