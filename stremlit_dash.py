@@ -6,7 +6,7 @@ import plotly.express as px
 from query_functions import *
 
 # change your subfolder path to the query folder of your system
-subfolder_path = "C:/Users/shiri/Documents/Assg1ADM/Assignment-1--Team-5/sql queries"
+subfolder_path = "/Users/m.saisrinivas/Git/Assignment-1--Team-5/sql queries"
 
 # variables declaration
 query_names_list = ["Query41","Query42","Query43","Query44","Query45"]

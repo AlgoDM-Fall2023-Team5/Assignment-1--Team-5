@@ -51,8 +51,12 @@ def query44():
     return store_input
 
 def query45():
-    pass
+    col1,col2 = st.columns(2)
 
+    with col1:
+        QOY_slider = st.slider("QOY", min_value=1,max_value=4,value=2)
+        year_slider= st.slider("year", min_value=1900, max_value=2023, value=2001)
+        return year_slider,QOY_slider
 def query46():
     pass
 
