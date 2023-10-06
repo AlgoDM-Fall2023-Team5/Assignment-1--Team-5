@@ -3,7 +3,7 @@ import streamlit as st
 
 
 # change your subfolder path to the query folder of your system
-subfolder_path = "C:/Users/shiri/Documents/Assg1ADM/Assignment-1--Team-5/sql queries dynamic"
+subfolder_path = "sql queries dynamic"
 
 # this is used to read the query
 def sql_query_reader(option):
