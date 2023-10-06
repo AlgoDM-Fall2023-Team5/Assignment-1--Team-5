@@ -145,11 +145,11 @@ conn = st.experimental_connection('snowflake',type='sql')
 #---=-=-=-=-=-=-=-=--=-=-=-=-=-=-=-=-=-=-==-=-=-=-=--==-=-=-=-
 # Main Code Execution
 
-st.title("Retail Analytics Dashboard: Insights on Sales, Returns, and Trends")
-select_button = st.radio("Mode Selection",["Simple Search","Custom Search"],horizontal=True)
+st.title("Retail Analytics Dashboard: Insights on Sales🤑, Returns, and Trends🚀")
+select_button = st.radio("Mode Selection",["Simple Search 🔎 ","Custom Search 🛠️ "],horizontal=True)
 
 #Selection based on the button
-if select_button == "Simple Search":
+if select_button == "Simple Search 🔎 ":
     col3,col4 = st.columns(2)
     with col3:
     
@@ -162,9 +162,11 @@ if select_button == "Simple Search":
         query_function = query_options[option]
         # calls that particular function
         st.write("Attributes")
-        query = query_function(option)
-    df = query_executor(query)
-
+        with st.spinner("⏳ Running... ⏳"):
+            query = query_function(option)
+    with st.spinner("⏳ Running... ⏳"):
+        df = query_executor(query)
+    st.success("✅ Done!")
     # This is for showing table 
     with col4:
         st.write("")
@@ -178,6 +180,7 @@ if select_button == "Simple Search":
     if st.button("Help"):        
         url = "https://www.tpc.org/tpc_documents_current_versions/pdf/tpc-ds_v2.1.0.pdf"
         st.write("dataset info and table schema can be found on this [link](%s)" %url)   
+        st.balloons()
         
 
 # Custom Query
@@ -189,7 +192,9 @@ else:
         st.write("dataset info and table schema can be found on this [link](%s)" %url)
         query = st.text_input('Enter Your Query',value="Select * from store_sales limit 10")
     
-    df = query_executor(query)
+    with st.spinner("⏳ Running... ⏳"):
+        df = query_executor(query)
+    st.success("✅ Done!")
     
 
     st.write("Table Results:")
