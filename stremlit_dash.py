@@ -9,8 +9,16 @@ from query_functions import *
 subfolder_path = "sql queries dynamic"
 
 # variables declaration
-query_names_list = ["Query41","Query42","Query43","Query44","Query45"
-                    ,"Query46","Query47","Query48","Query49","Query50"]
+query_names_list = [ 'Quantity of items for specific size, units, and color',
+    'Extended sales price of each category for specific month and year',
+    'Store sales for each day of the week throughout the specific year and time zone',
+    'Best and Worst performing products for specific store',
+    'Web Sales in Various States for specific Quarter and year',
+    'Weekend Shopping Trends of Out-of-Town Customers for specific city, year, vehicle count and dependent count',
+    'Three-Year Cumulative Sales with Monthly Deviations > 10 percentage from Average Monthly Sales for specific years',
+    'Sales by Marital Status, Education, and State',
+    'Return Ratios by channel for specific month and year',
+    'Product Returns Over Time After Purchase  for specific month and year']
 chart_types = ["Bar Chart","Pie Chart","Scatter Plot","Line Chart"]
 
 # dictonary instead of if else to call functions
@@ -27,16 +35,16 @@ query_options = {'Query41':query41,
 
 #dictonary based on selection
 question_to_answer = {
-    'Query41':'Query41',
-    'Query42':'Query42',
-    'Query43':'Query43',
-    'Query44':'Query44',
-    'Query45':'Query45',
-    'Query46':'Query46',
-    'Query47':'Query47',
-    'Query48':'Query48',
-    'Query49':'Query49',
-    'Query50':'Query50'
+    'Quantity of items for specific size, units, and color':'Query41',
+    'Extended sales price of each category for specific month and year':'Query42',
+    'Store sales for each day of the week throughout the specific year and time zone':'Query43',
+    'Best and Worst performing products for specific store':'Query44',
+    'Web Sales in Various States for specific Quarter and year':'Query45',
+    'Weekend Shopping Trends of Out-of-Town Customers for specific city, year, vehicle count and dependent count':'Query46',
+    'Three-Year Cumulative Sales with Monthly Deviations > 10 percentage from Average Monthly Sales for specific years':'Query47',
+    'Sales by Marital Status, Education, and State':'Query48',
+    'Return Ratios by channel for specific month and year':'Query49',
+    'Product Returns Over Time After Purchase  for specific month and year':'Query50'
 }
 
 
@@ -137,14 +145,15 @@ conn = st.experimental_connection('snowflake',type='sql')
 #---=-=-=-=-=-=-=-=--=-=-=-=-=-=-=-=-=-=-==-=-=-=-=--==-=-=-=-
 # Main Code Execution
 
-st.title("SNOWFLAKE SQL QUERY TOOL")
-select_button = st.radio("Query Type",["Given Queries","Write your Query"],horizontal=True)
+st.title("Retail Analytics Dashboard: Insights on Sales, Returns, and Trends")
+select_button = st.radio("Mode Selection",["Simple Search","Custom Search"],horizontal=True)
 
 #Selection based on the button
-if select_button == "Given Queries":
+if select_button == "Simple Search":
     col3,col4 = st.columns(2)
     with col3:
-        option = st.selectbox("Select a Query",query_names_list)
+    
+        option = st.selectbox("Pick a pre-defined action",query_names_list)
     
     if option in question_to_answer:
         option = question_to_answer[option]
@@ -166,6 +175,10 @@ if select_button == "Given Queries":
 
     chart_maker(df)
 
+    if st.button("Help"):        
+        url = "https://www.tpc.org/tpc_documents_current_versions/pdf/tpc-ds_v2.1.0.pdf"
+        st.write("dataset info and table schema can be found on this [link](%s)" %url)   
+        
 
 # Custom Query
 else:
