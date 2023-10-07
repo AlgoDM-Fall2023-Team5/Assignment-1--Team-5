@@ -1,9 +1,8 @@
 # Link to CodeLab: 
-Assignment-1--Team-5 Report
+[Assignment-1--Team-5 Report](https://codelabs-preview.appspot.com/?file_id=1weK3M722C8g5DGMYXoKv_qOPIN3k-KORHFZ3oPvp8n0#0)
 
-# Link to Retail Analytics Dashboard:
-Click Here
-
+# Link to Snowflake Dashboard:
+[Click Here](https://app.snowflake.com/us-east-1/ikb40337/#/asssignment_1-dEJoIhYGa)
 
 
 # Code Documentation For Streamlit App:
@@ -136,6 +135,6 @@ After entering your query, you'll see the query results in a table, and you can 
 
 📚 Dataset Information and Table Schema: You can find dataset information and table schema here.
 
-⚠️ Note:
+⚠️ Note: 
 
 👩‍💻 Developed by Team-5
