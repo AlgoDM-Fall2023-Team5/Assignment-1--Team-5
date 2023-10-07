@@ -1,12 +1,12 @@
 # Link to CodeLab: 
-[Assignment-1--Team-5 Report](https://codelabs-preview.appspot.com/?file_id=1weK3M722C8g5DGMYXoKv_qOPIN3k-KORHFZ3oPvp8n0#0)
+[Assignment-1--Team-5 Report🔗](https://codelabs-preview.appspot.com/?file_id=1weK3M722C8g5DGMYXoKv_qOPIN3k-KORHFZ3oPvp8n0#0)
 
 # Link to Snowflake Dashboard:
-[Click Here](https://app.snowflake.com/us-east-1/ikb40337/#/asssignment_1-dEJoIhYGa)
+[Click Here🔗](https://app.snowflake.com/us-east-1/ikb40337/#/asssignment_1-dEJoIhYGa)
 
 
-# Code Documentation For Streamlit App:
-Streamlit App🔗 | Streamlit Code (Github)🔗
+# Code Documentation for Streamlit App:
+[Streamlit App🔗]() | [Streamlit Code (Github)🔗](https://github.com/AlgoDM-Fall2023-Team5/Assignment-1--Team-5/tree/Main/streamlit)
 
 
 ## Setting up Virtual Environment:
@@ -89,7 +89,7 @@ To run this project, you need to follow these steps:
 
 
 
-## Using The App
+## Using the App
 🚀 Welcome to the Retail Analytics Dashboard
 
 This interactive tool allows you to run SQL queries on a Snowflake database and visualize the results using various chart types. Let's explore how to use it step by step.
