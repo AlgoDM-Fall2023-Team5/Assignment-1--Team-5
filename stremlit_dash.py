@@ -4,6 +4,10 @@ import pandas as pd
 import matplotlib.pyplot as plt
 import plotly.express as px
 from query_functions import *
+from sqlalchemy import create_engine,text
+
+
+snowflake_url = st.secrets["snowflake"]["url"]
 
 # change your subfolder path to the query folder of your system
 subfolder_path = "sql queries dynamic"
@@ -123,7 +127,14 @@ def query_executor(query):
         #get the query from another folder
         #query = sql_query_reader(option)
         # executing the sql query based on the selection
-        table = conn.query(query,ttl=600)
+        #table = conn.query(query,ttl=600)
+        with engine.connect() as conn:
+            result = conn.execute(text(query))
+            table = result.fetchall()
+            column_names = result.keys()  # Get the column names from the query result
+
+    # Convert the query result to a Pandas DataFrame
+            table = pd.DataFrame(table, columns=column_names)
         
         return table
     except Exception as e:
@@ -133,7 +144,10 @@ def query_executor(query):
 #=========================================================================
 
 # Connection Initialisation
-conn = st.experimental_connection('snowflake',type='sql')
+#conn = st.experimental_connection('snowflake',type='sql')
+
+engine = create_engine(snowflake_url)
+
 #---=-=-=-=-=-=-=-=--=-=-=-=-=-=-=-=-=-=-==-=-=-=-=--==-=-=-=-
 # Main Code Execution
 
