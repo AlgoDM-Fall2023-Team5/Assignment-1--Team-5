@@ -6,7 +6,7 @@
 
 
 # Code Documentation for Streamlit App:
-[Streamlit App🔗]() | [Streamlit Code (Github)🔗](https://github.com/AlgoDM-Fall2023-Team5/Assignment-1--Team-5/tree/Main/streamlit)
+[Streamlit Code (Github)🔗](https://github.com/AlgoDM-Fall2023-Team5/Assignment-1--Team-5/tree/Main/streamlit)
 
 
 ## Setting up Virtual Environment:
@@ -133,8 +133,9 @@ After entering your query, you'll see the query results in a table, and you can 
 
 ### Additional Information
 
-📚 Dataset Information and Table Schema: You can find dataset information and table schema here.
+📚 Dataset Information and Table Schema: You can find dataset information and table schema [here](http://tpc.org/tpc_documents_current_versions/pdf/tpc-ds_v3.2.0.pdf).
 
-⚠️ Note: 
+⚠️ Note: Certain columns may not be suitable for plotting due to the absence of a sufficient amount of data, leading to potential issues with data visualization or graphical representation
 
 👩‍💻 Developed by Team-5
+🤝Contributions:  
