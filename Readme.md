@@ -138,4 +138,4 @@ After entering your query, you'll see the query results in a table, and you can 
 ⚠️ Note: Certain columns may not be suitable for plotting due to the absence of a sufficient amount of data, leading to potential issues with data visualization or graphical representation
 
 👩‍💻 Developed by Team-5
-🤝Contributions:  
+🤝Contributions: [Click here🔗](https://github.com/AlgoDM-Fall2023-Team5/Assignment-1--Team-5/blob/Main/requirements.txt) 
