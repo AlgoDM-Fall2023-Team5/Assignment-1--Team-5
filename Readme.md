@@ -7,10 +7,87 @@ Click Here
 
 
 # Code Documentation For Streamlit App:
-Streamlit App🔗 | Streamlit Code🔗
+Streamlit App🔗 | Streamlit Code (Github)🔗
+
 
 ## Setting up Virtual Environment:
 ### Requirements:
+To run this project, you need to follow these steps:
+
+ 
+
+1. **Snowflake Account**:
+   - Sign up for a Snowflake account if you don't have one. You can use the trial version.
+   - Get your Snowflake account credentials (account URL, username, password).
+
+ 
+
+2. **Anaconda Environment (Recommended)**:
+   - It is recommended to use Anaconda for managing the project environment.
+   - Create a new Anaconda environment using the following command:
+
+ 
+
+     ```bash
+     conda create --name <environment name> python=3.8
+     ```
+
+ 
+
+   - Activate the environment:
+
+ 
+
+     ```bash
+     conda activate <environment name> 
+     ```
+
+ 
+
+3. **Install Required Packages**:
+   - In the activated environment, navigate to the project directory.
+   - Install the required packages using pip from the `requirements.txt` file:
+
+ 
+
+     ```bash
+     pip install -r requirements.txt
+     ```
+
+ 
+
+4. **Configure Snowflake Credentials**:
+   - Store your Snowflake SQLAlchemy URL securely in a `.secrets` file within the `.streamlit` directory on your local machine.
+   - The URL structure should look like this:
+
+ 
+
+     ```ini
+     [snowflake]
+     url = snowflake://<username>:<password>@<account-url>/<database>/<schema>
+     ```
+
+ 
+
+   - Replace `<username>`, `<password>`, `<account-url>`, `<database>`, and `<schema>` with your Snowflake account details.
+
+ 
+
+5. **Run the Application**:
+   - Run the Streamlit application using the following command,
+   Make sure you are in the strteamlit folder:
+
+ 
+
+     ```bash
+     streamlit run stremlit_dash.py
+     ```
+
+ 
+
+   - Access the application in your web browser at the specified URL (usually http://localhost:8501).
+
+
 
 
 ## Using The App
